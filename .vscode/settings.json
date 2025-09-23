@@ -23,6 +23,7 @@
   },
   "prettier.enable": false,
   "eslint.enable": false,
+  "biome.configurationPath": "./biome.json",
   "[typescript]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
