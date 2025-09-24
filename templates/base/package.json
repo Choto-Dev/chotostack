@@ -9,8 +9,9 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
+    "@workspace/typescript-config": "workspace:*",
     "turbo": "2.5.6",
-    "typescript": "5.8.2",
+    "typescript": "catalog:",
     "ultracite": "5.2.5"
   },
   "packageManager": "pnpm@10.12.4",
