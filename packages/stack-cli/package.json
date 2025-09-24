@@ -1,0 +1,43 @@
+{
+  "name": "@choto/stack-cli",
+  "version": "0.0.1",
+  "description": "CLI for chotostack project.",
+  "type": "module",
+  "scripts": {
+    "build": "unbuild",
+    "cli": "node ./dist/index.mjs",
+    "lint": "biome check --write .",
+    "pub:link": "npm unlink -g && npm link",
+    "start": "pnpm build && pnpm cli"
+  },
+  "bin": {
+    "stack-cli": "./dist/index.mjs"
+  },
+  "keywords": [
+    "chotostack",
+    "cli"
+  ],
+  "author": "Rifat Khan",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "package.json",
+    "README.md"
+  ],
+  "packageManager": "pnpm@10.12.4",
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@choto/typescript-config": "workspace:*",
+    "@types/node": "^24.5.2",
+    "type-fest": "^5.0.1",
+    "typescript": "catalog:",
+    "unbuild": "^3.6.1"
+  },
+  "dependencies": {
+    "commander": "^14.0.1",
+    "consola": "^3.4.2",
+    "giget": "^2.0.0"
+  }
+}
