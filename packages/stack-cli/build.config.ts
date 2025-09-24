@@ -1,14 +1,14 @@
-import { defineBuildConfig } from 'unbuild';
+import { defineBuildConfig } from "unbuild";
 
 export default defineBuildConfig({
   entries: [
-    './src/index.ts',
+    "./src/index.ts",
     {
-      builder: 'mkdist',
-      input: './src/',
-      outDir: './dist/',
+      builder: "mkdist",
+      input: "./src/",
+      outDir: "./dist/",
     },
   ],
-  outDir: 'dist',
+  outDir: "dist",
   declaration: true,
 });

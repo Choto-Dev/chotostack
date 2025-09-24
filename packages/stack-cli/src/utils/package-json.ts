@@ -1,4 +1,4 @@
-import pkg from '../../package.json' with { type: 'json' };
+import pkg from "../../package.json" with { type: "json" };
 
 /**
  * Package name, description, version and author name.

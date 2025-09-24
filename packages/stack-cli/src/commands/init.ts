@@ -1,32 +1,32 @@
-import path from 'node:path';
-import { Command } from 'commander';
-import { consola } from 'consola';
-import { createBaseProject } from '../utils/create-base-project.js';
-import { packageJson } from '../utils/package-json.js';
+import path from "node:path";
+import { Command } from "commander";
+import { consola } from "consola";
+import { createBaseProject } from "../utils/create-base-project.js";
+import { packageJson } from "../utils/package-json.js";
 
 export const initCommand = new Command();
-let projectPath = '';
+let projectPath = "";
 
 initCommand
-  .name('init')
-  .description('Initiate a ChotoStack Project.')
-  .version(packageJson.version, '-v, --version')
-  .argument('[project-name]', 'Project Name')
-  .option('-n, --name [name]', 'Project Name')
+  .name("init")
+  .description("Initiate a ChotoStack Project.")
+  .version(packageJson.version, "-v, --version")
+  .argument("[project-name]", "Project Name")
+  .option("-n, --name [name]", "Project Name")
   .action(async (projectNameArg, options) => {
     if (!options.name && projectNameArg === undefined) {
-      const projectName = await consola.prompt('Project Name', {
-        type: 'text',
+      const projectName = await consola.prompt("Project Name", {
+        type: "text",
       });
 
       projectPath = path.join(process.cwd(), projectName);
     }
 
-    if (typeof projectNameArg === 'string') {
+    if (typeof projectNameArg === "string") {
       projectPath = path.resolve(path.join(process.cwd(), projectNameArg));
     }
 
-    if (projectNameArg === undefined && typeof options.name === 'string') {
+    if (projectNameArg === undefined && typeof options.name === "string") {
       projectPath = path.join(process.cwd(), options.name);
     }
 
