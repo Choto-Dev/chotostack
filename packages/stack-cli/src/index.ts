@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
-import { initCommand } from "./commands/init.js";
-import { packageJson } from "./utils/package-json.js";
+import { addCommand } from "./commands/add";
+import { initCommand } from "./commands/init";
+import { packageJson } from "./utils/package-json";
 
 // Terminate process on `SIGINT` and `SIGTERM` signal.
 const handleSigTerm = () => process.exit(0);
@@ -19,4 +20,5 @@ program
     program.help();
   })
   .addCommand(initCommand)
+  .addCommand(addCommand)
   .parse();

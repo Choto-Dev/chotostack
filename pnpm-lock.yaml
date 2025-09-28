@@ -32,28 +32,6 @@ importers:
 
   configs/typescript: {}
 
-  packages/cli:
-    dependencies:
-      commander:
-        specifier: ^14.0.1
-        version: 14.0.1
-    devDependencies:
-      '@choto/typescript-config':
-        specifier: workspace:*
-        version: link:../../configs/typescript
-      '@types/node':
-        specifier: ^24.5.2
-        version: 24.5.2
-      type-fest:
-        specifier: ^5.0.1
-        version: 5.0.1
-      typescript:
-        specifier: 'catalog:'
-        version: 5.9.2
-      unbuild:
-        specifier: ^3.6.1
-        version: 3.6.1(typescript@5.9.2)
-
   packages/stack-cli:
     dependencies:
       commander:
@@ -81,21 +59,6 @@ importers:
       unbuild:
         specifier: ^3.6.1
         version: 3.6.1(typescript@5.9.2)
-
-  templates/base:
-    devDependencies:
-      '@biomejs/biome':
-        specifier: 2.2.0
-        version: 2.2.0
-      turbo:
-        specifier: 2.5.6
-        version: 2.5.6
-      typescript:
-        specifier: 5.8.2
-        version: 5.8.2
-      ultracite:
-        specifier: 5.2.5
-        version: 5.2.5(@types/node@24.5.2)(jiti@2.6.0)(lightningcss@1.30.1)(typescript@5.8.2)
 
 packages:
 
@@ -1279,11 +1242,6 @@ packages:
     resolution: {integrity: sha512-9MpwAI52m8H6ssA542UxSLnSiSD2dsC3/L85g6hVubLSXd82wdI80eZwTWhdOfN67NlA+D+oipAs1MlcTcu3KA==}
     engines: {node: '>=20'}
 
-  typescript@5.8.2:
-    resolution: {integrity: sha512-aJn6wq13/afZp/jT9QZmwEjDqqvSGp1VT5GVg+f/t6/oVyrgXM6BY1h9BRh/O5p3PlUPAe+WuiEZOmb/49RqoQ==}
-    engines: {node: '>=14.17'}
-    hasBin: true
-
   typescript@5.9.2:
     resolution: {integrity: sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A==}
     engines: {node: '>=14.17'}
@@ -1660,10 +1618,6 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.52.0':
     optional: true
-
-  '@trpc/server@11.5.1(typescript@5.8.2)':
-    dependencies:
-      typescript: 5.8.2
 
   '@trpc/server@11.5.1(typescript@5.9.2)':
     dependencies:
@@ -2398,17 +2352,6 @@ snapshots:
 
   tinyspy@4.0.4: {}
 
-  trpc-cli@0.10.2(typescript@5.8.2):
-    dependencies:
-      '@trpc/server': 11.5.1(typescript@5.8.2)
-      '@types/omelette': 0.4.5
-      commander: 14.0.1
-      picocolors: 1.1.1
-      zod: 3.25.76
-      zod-to-json-schema: 3.24.6(zod@3.25.76)
-    transitivePeerDependencies:
-      - typescript
-
   trpc-cli@0.10.2(typescript@5.9.2):
     dependencies:
       '@trpc/server': 11.5.1(typescript@5.9.2)
@@ -2451,44 +2394,9 @@ snapshots:
     dependencies:
       tagged-tag: 1.0.0
 
-  typescript@5.8.2: {}
-
   typescript@5.9.2: {}
 
   ufo@1.6.1: {}
-
-  ultracite@5.2.5(@types/node@24.5.2)(jiti@2.6.0)(lightningcss@1.30.1)(typescript@5.8.2):
-    dependencies:
-      '@clack/prompts': 0.11.0
-      deepmerge: 4.3.1
-      jsonc-parser: 3.3.1
-      nypm: 0.6.2
-      trpc-cli: 0.10.2(typescript@5.8.2)
-      vitest: 3.2.4(@types/node@24.5.2)(jiti@2.6.0)(lightningcss@1.30.1)
-      zod: 4.1.11
-    transitivePeerDependencies:
-      - '@edge-runtime/vm'
-      - '@inquirer/prompts'
-      - '@types/debug'
-      - '@types/node'
-      - '@vitest/browser'
-      - '@vitest/ui'
-      - happy-dom
-      - jiti
-      - jsdom
-      - less
-      - lightningcss
-      - msw
-      - omelette
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-      - tsx
-      - typescript
-      - yaml
 
   ultracite@5.2.5(@types/node@24.5.2)(jiti@2.6.0)(lightningcss@1.30.1)(typescript@5.9.2):
     dependencies:

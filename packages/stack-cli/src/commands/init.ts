@@ -1,8 +1,8 @@
 import path from "node:path";
 import { Command } from "commander";
 import { consola } from "consola";
-import { createBaseProject } from "../utils/create-base-project.js";
-import { packageJson } from "../utils/package-json.js";
+import { downloadTemplate } from "../utils/download-template";
+import { packageJson } from "../utils/package-json";
 
 export const initCommand = new Command();
 let projectPath = "";
@@ -30,6 +30,7 @@ initCommand
       projectPath = path.join(process.cwd(), options.name);
     }
 
-    createBaseProject(projectPath);
-    // consola.box(projectNameArg, options);
+    await downloadTemplate(projectPath, "base", {
+      startMsg: "Creating base files...",
+    });
   });

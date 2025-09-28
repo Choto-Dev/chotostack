@@ -6,5 +6,12 @@
     "formatter": {
       "quoteStyle": "double"
     }
+  },
+  "linter": {
+    "rules": {
+      "performance": {
+        "noNamespaceImport": "off"
+      }
+    }
   }
 }
