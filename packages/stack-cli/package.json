@@ -6,6 +6,7 @@
   "scripts": {
     "build": "unbuild",
     "cli": "node ./dist/index.mjs",
+    "gen:template": "tsx ./scripts/generate-tempate-types.ts",
     "lint": "biome check --write .",
     "pub:link": "npm unlink -g && npm link",
     "start": "pnpm build && pnpm cli"
@@ -31,6 +32,8 @@
   "devDependencies": {
     "@choto/typescript-config": "workspace:*",
     "@types/node": "^24.5.2",
+    "ts-morph": "^27.0.0",
+    "tsx": "^4.20.6",
     "type-fest": "^5.0.1",
     "typescript": "catalog:",
     "unbuild": "^3.6.1"
