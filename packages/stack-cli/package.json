@@ -4,7 +4,7 @@
   "description": "CLI for chotostack project.",
   "type": "module",
   "scripts": {
-    "build": "unbuild",
+    "build": "pnpm gen:template && unbuild",
     "cli": "node ./dist/index.mjs",
     "gen:template": "tsx ./scripts/generate-tempate-types.ts",
     "lint": "biome check --write .",

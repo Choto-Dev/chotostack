@@ -1,31 +1,15 @@
 import path from "node:path";
 import { Command } from "commander";
 import { consola } from "consola";
-import {
-  downloadTemplate,
-  type TTemplatePath,
-} from "../utils/download-template.js";
+import { type TTemplateNamespace, templates } from "../auto-gen/templates.js";
+import { downloadTemplate } from "../utils/download-template.js";
 import { packageJson } from "../utils/package-json";
-
-type TApps = {
-  label: string;
-  value: TTemplatePath;
-}[];
 
 export const addCommand = new Command();
 let projectPath = "";
 let templateNamespace = "";
 
-const allTemplatesOption: TApps = [
-  {
-    label: "Nextjs App",
-    value: "apps/nextjs-app",
-  },
-  {
-    label: "Nextjs Shadcn UI",
-    value: "packages/nextjs-shadcn-ui",
-  },
-];
+const templatesOption = templates.filter((app) => app.value.includes("/"));
 
 addCommand
   .name("add")
@@ -36,12 +20,14 @@ addCommand
     if (!appPath) {
       templateNamespace = await consola.prompt("Select an app to download", {
         type: "select",
-        options: allTemplatesOption,
+        options: templatesOption,
       });
 
       projectPath = path.resolve(path.join(process.cwd(), templateNamespace));
     }
 
-    // consola.log(projectPath);
-    await downloadTemplate(projectPath, templateNamespace as TTemplatePath);
+    await downloadTemplate(
+      projectPath,
+      templateNamespace as TTemplateNamespace
+    );
   });

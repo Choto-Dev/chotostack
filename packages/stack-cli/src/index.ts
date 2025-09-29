@@ -2,6 +2,7 @@
 
 import { Command } from "commander";
 import { addCommand } from "./commands/add";
+import { createCommand } from "./commands/create";
 import { initCommand } from "./commands/init";
 import { packageJson } from "./utils/package-json";
 
@@ -19,6 +20,7 @@ program
   .action(() => {
     program.help();
   })
-  .addCommand(initCommand)
   .addCommand(addCommand)
+  .addCommand(createCommand)
+  .addCommand(initCommand)
   .parse();

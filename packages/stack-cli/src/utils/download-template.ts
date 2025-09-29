@@ -1,17 +1,17 @@
+import fs from "node:fs/promises";
 import consola from "consola";
 import * as giget from "giget";
-
-type TTemplatePath = "base" | "apps/nextjs-app" | "packages/nextjs-shadcn-ui";
+import type { TTemplateNamespace } from "../auto-gen/templates";
 
 /**
- * Download templates files from github
- * @param projectPath Root directory of the project
- * @param templatePath Template path in github
+ * Download templates files from github.
+ * @param downloadDir Directory to download
+ * @param namespace Template namespace in github
  * @param options Different message options
  */
 async function downloadTemplate(
-  projectPath: string,
-  templatePath: TTemplatePath,
+  downloadDir: string,
+  namespace: TTemplateNamespace,
   options?: {
     startMsg?: string;
     successMsg?: string;
@@ -21,12 +21,18 @@ async function downloadTemplate(
   consola.start(options?.startMsg || "Creating files...");
   await giget
     .downloadTemplate(
-      `github:Choto-Dev/choto-templates/templates/${templatePath}/files`,
+      `github:Choto-Dev/choto-templates/templates/${namespace}/files`,
       {
-        dir: projectPath,
+        dir: downloadDir,
       }
     )
-    .then(() => {
+    .then(async ({ dir }) => {
+      const entries = await fs.readdir(dir);
+      if (entries.length === 0) {
+        consola.error(options?.errorMsg || "Failed to create files");
+        await fs.rm(dir, { recursive: true });
+        return;
+      }
       consola.success(options?.successMsg || "Files created successfully");
     })
     .catch((error) => {
@@ -36,4 +42,30 @@ async function downloadTemplate(
     });
 }
 
-export { downloadTemplate, type TTemplatePath };
+/**
+ * Download templates files from github without any messages.
+ * @param downloadDir Directory to download
+ * @param namespace Template namespace in github
+ */
+async function downloadTemplateWithoutMsg(
+  downloadDir: string,
+  namespace: TTemplateNamespace
+) {
+  await giget
+    .downloadTemplate(
+      `github:Choto-Dev/choto-templates/templates/${namespace}/files`,
+      {
+        dir: downloadDir,
+      }
+    )
+    .then(async ({ dir }) => {
+      const entries = await fs.readdir(dir);
+      if (entries.length === 0) {
+        consola.error("Failed to create files");
+        await fs.rm(dir, { recursive: true });
+        return;
+      }
+    });
+}
+
+export { downloadTemplate, downloadTemplateWithoutMsg };
