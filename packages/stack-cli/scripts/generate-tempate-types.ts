@@ -79,7 +79,7 @@ file.addTypeAlias({
 file.addTypeAlias({
   isExported: true,
   name: "TTemplateOption",
-  type: "{ label: string; value: TTemplatePath }",
+  type: "{ label: string; value: TTemplateNamespace }",
 });
 
 // Create `templates` object.
