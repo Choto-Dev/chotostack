@@ -3,9 +3,10 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
+    "check-types": "turbo run check-types",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
     "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "check-types": "turbo run check-types"
+    "lint": "turbo run lint"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
