@@ -1,18 +1,24 @@
 import path from "node:path";
 import { Command } from "commander";
 import { consola } from "consola";
-import { createApp } from "../utils/create-app";
+import { downloadTemplateWithoutMsg } from "../utils/download-template";
 import { packageJson } from "../utils/package-json";
+
+type TAppTemplate = "base-template" | "basic-app";
 
 type TAppTemplateOptions = {
   label: string;
-  value: string;
+  value: TAppTemplate;
 }[];
 
 const appTemplateOptions: TAppTemplateOptions = [
   {
-    label: "Basic",
-    value: "basic",
+    label: "Base Template",
+    value: "base-template",
+  },
+  {
+    label: "Basic App",
+    value: "basic-app",
   },
 ];
 
@@ -47,7 +53,9 @@ createCommand
       options: appTemplateOptions,
     });
 
-    consola.start("Creating project...");
+    consola.start(
+      `Creating project with ${appTemplateOptions.find((option) => option.value === selectedOption)?.label} template...`
+    );
     await createApp(projectPath, selectedOption)
       .then(() => {
         consola.success("Project is created!");
@@ -56,3 +64,18 @@ createCommand
         consola.error(error);
       });
   });
+
+async function createApp(downloadDir: string, templateName: TAppTemplate) {
+  await downloadTemplateWithoutMsg(downloadDir, "base");
+
+  if (templateName === "basic-app") {
+    await downloadTemplateWithoutMsg(
+      path.join(downloadDir, "apps/nextjs-app"),
+      "apps/nextjs-app"
+    );
+    await downloadTemplateWithoutMsg(
+      path.join(downloadDir, "packages/nextjs-shadcn-ui"),
+      "packages/nextjs-shadcn-ui"
+    );
+  }
+}
