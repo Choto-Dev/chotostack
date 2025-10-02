@@ -1,11 +1,14 @@
+// import fs from "node:fs/promises";
 import path from "node:path";
 import { Command } from "commander";
 import { consola } from "consola";
 import { downloadTemplate } from "../utils/download-template";
 import { packageJson } from "../utils/package-json";
+// import { defineChotostackConfig } from "../utils/stack-config";
 
 export const initCommand = new Command();
 let projectPath = "";
+// let workspaceName = "workspace";
 
 initCommand
   .name("init")
@@ -30,7 +33,37 @@ initCommand
       projectPath = path.join(process.cwd(), options.name);
     }
 
-    await downloadTemplate(projectPath, "base", {
-      startMsg: "Creating base files...",
+    // workspaceName = await consola.prompt("Workspace Name", {
+    //   type: "text",
+    //   default: "workspace",
+    // });
+
+    consola.start("Initiate ChotoProject");
+    await init().then(() => {
+      consola.success("Success");
     });
   });
+
+// Todo: initiate a choto project in existing project.
+async function init() {
+  await downloadTemplate(projectPath, "base", {
+    startMsg: "Creating base files...",
+  });
+
+  // const pkgName = `@${workspaceName}/typescript-config`;
+
+  // const chotostackConfig = defineChotostackConfig({
+  //   workspaceName,
+  //   packages: {
+  //     [pkgName]: {
+  //       name: "",
+  //     },
+  //   },
+  // });
+
+  // await fs.writeFile(
+  //   path.join(projectPath, "chotostack.json"),
+  //   JSON.stringify(chotostackConfig, null, 2),
+  //   "utf8"
+  // );
+}
