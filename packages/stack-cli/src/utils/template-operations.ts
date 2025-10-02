@@ -1,7 +1,9 @@
 import fs from "node:fs/promises";
+import path from "node:path";
 import consola from "consola";
 import * as giget from "giget";
 import type { TTemplateNamespace } from "../auto-gen/templates";
+import type { TChotostackConfig } from "./stack-config";
 
 /**
  * Download templates files from github.
@@ -68,4 +70,17 @@ async function downloadTemplateWithoutMsg(
     });
 }
 
-export { downloadTemplate, downloadTemplateWithoutMsg };
+/**
+ * Delete template with namespace.
+ * @param namespace Namespace of template package.
+ */
+async function deleteTemplate(namespace: TTemplateNamespace) {
+  const configFileDir = path.join(process.cwd(), "chotostack.json");
+  const configFile = await fs.readFile(configFileDir, "utf-8");
+  const config: TChotostackConfig = JSON.parse(configFile);
+  const packageDir = config.packages[namespace];
+
+  await fs.rm(packageDir, { recursive: true });
+}
+
+export { downloadTemplate, downloadTemplateWithoutMsg, deleteTemplate };

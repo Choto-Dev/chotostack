@@ -2,8 +2,8 @@
 import path from "node:path";
 import { Command } from "commander";
 import { consola } from "consola";
-import { downloadTemplate } from "../utils/download-template";
 import { packageJson } from "../utils/package-json";
+import { downloadTemplate } from "../utils/template-operations";
 // import { defineChotostackConfig } from "../utils/stack-config";
 
 export const initCommand = new Command();

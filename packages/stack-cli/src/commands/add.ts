@@ -2,11 +2,12 @@ import path from "node:path";
 import { Command } from "commander";
 import { consola } from "consola";
 import { type TTemplateNamespace, templates } from "../auto-gen/templates.js";
-import { downloadTemplate } from "../utils/download-template.js";
 import { packageJson } from "../utils/package-json";
+import { addPackageChotostackConfig } from "../utils/stack-config.js";
+import { downloadTemplate } from "../utils/template-operations.js";
 
 export const addCommand = new Command();
-let projectPath = "";
+let downloadTemplateDir = "";
 let templateNamespace = "";
 
 const templatesOption = templates.filter((app) => app.value.includes("/"));
@@ -23,11 +24,19 @@ addCommand
         options: templatesOption,
       });
 
-      projectPath = path.resolve(path.join(process.cwd(), templateNamespace));
+      downloadTemplateDir = path.resolve(
+        path.join(process.cwd(), templateNamespace)
+      );
     }
 
-    await downloadTemplate(
-      projectPath,
-      templateNamespace as TTemplateNamespace
-    );
+    await addPackages();
   });
+
+async function addPackages() {
+  await downloadTemplate(
+    downloadTemplateDir,
+    templateNamespace as TTemplateNamespace
+  ).then(async () => {
+    await addPackageChotostackConfig(templateNamespace as TTemplateNamespace);
+  });
+}

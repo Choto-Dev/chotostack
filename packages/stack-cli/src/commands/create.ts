@@ -1,8 +1,8 @@
 import path from "node:path";
 import { Command } from "commander";
 import { consola } from "consola";
-import { downloadTemplateWithoutMsg } from "../utils/download-template";
 import { packageJson } from "../utils/package-json";
+import { downloadTemplateWithoutMsg } from "../utils/template-operations";
 
 type TAppTemplate = "base-template" | "basic-app";
 

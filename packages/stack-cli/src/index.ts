@@ -4,6 +4,7 @@ import { Command } from "commander";
 import { addCommand } from "./commands/add";
 import { createCommand } from "./commands/create";
 import { initCommand } from "./commands/init";
+import { removeCommand } from "./commands/remove";
 import { packageJson } from "./utils/package-json";
 
 // Terminate process on `SIGINT` and `SIGTERM` signal.
@@ -23,4 +24,5 @@ program
   .addCommand(addCommand)
   .addCommand(createCommand)
   .addCommand(initCommand)
+  .addCommand(removeCommand)
   .parse();
