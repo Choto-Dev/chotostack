@@ -11,8 +11,6 @@ import { deleteTemplate } from "../utils/template-operations.js";
 export const removeCommand = new Command();
 let templateNamespace = "";
 
-const installerTemplatesOption = await installedPackagesInChotostackConfig();
-
 removeCommand
   .name("remove")
   .description("Remove apps and feature packages")
@@ -20,6 +18,9 @@ removeCommand
   .argument("[path]", "App or package path")
   .action(async (appPath, _options) => {
     if (!appPath) {
+      const installerTemplatesOption =
+        await installedPackagesInChotostackConfig();
+
       templateNamespace = await consola.prompt("Select an app to download", {
         type: "select",
         options: installerTemplatesOption,
