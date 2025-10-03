@@ -12,8 +12,8 @@ type TChotostackConfig = {
 };
 
 /**
- * Define ChotoStack config Object.
- * @param config ChotoStack config Object.
+ * Define ChotoStack config object.
+ * @param config ChotoStack config object.
  * @returns Config object.
  */
 function defineChotostackConfig(config: TChotostackConfig) {
@@ -23,9 +23,13 @@ function defineChotostackConfig(config: TChotostackConfig) {
 /**
  * Add package namespace in ChotoStack config.
  * @param namespace Namespace of package.
+ * @param rootDir chotostack.json file directory.
  */
-async function addPackageChotostackConfig(namespace: TTemplateNamespace) {
-  const configFileDir = path.join(process.cwd(), "chotostack.json");
+async function addPackageChotostackConfig(
+  namespace: TTemplateNamespace,
+  rootDir: string = process.cwd()
+) {
+  const configFileDir = path.join(rootDir, "chotostack.json");
   const configFile = await fs.readFile(configFileDir, "utf-8");
 
   const config: TChotostackConfig = JSON.parse(configFile);
