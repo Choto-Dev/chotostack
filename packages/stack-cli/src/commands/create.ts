@@ -53,8 +53,6 @@ createCommand
       projectPath = path.join(process.cwd(), options.name);
     }
 
-    consola.log(options);
-
     const selectedOption = await consola.prompt("Select a template", {
       type: "select",
       options: appTemplateOptions,

@@ -3,6 +3,7 @@
 import { Command } from "commander";
 import { addCommand } from "./commands/add";
 import { createCommand } from "./commands/create";
+import { createPackageCommand } from "./commands/create-package";
 import { initCommand } from "./commands/init";
 import { removeCommand } from "./commands/remove";
 import { packageJson } from "./utils/package-json";
@@ -23,6 +24,7 @@ program
   })
   .addCommand(addCommand)
   .addCommand(createCommand)
+  .addCommand(createPackageCommand)
   .addCommand(initCommand)
   .addCommand(removeCommand)
   .parse();

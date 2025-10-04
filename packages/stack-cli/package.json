@@ -41,6 +41,7 @@
   "dependencies": {
     "commander": "^14.0.1",
     "consola": "^3.4.2",
-    "giget": "^2.0.0"
+    "giget": "^2.0.0",
+    "yaml": "^2.8.1"
   }
 }

@@ -11,6 +11,9 @@
     "rules": {
       "performance": {
         "noNamespaceImport": "off"
+      },
+      "style": {
+        "noNonNullAssertion": "off"
       }
     }
   }

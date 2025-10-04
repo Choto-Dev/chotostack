@@ -10,7 +10,12 @@ export const addCommand = new Command();
 let downloadTemplateDir = "";
 let templateNamespace = "";
 
-const templatesOption = templates.filter((app) => app.value.includes("/"));
+const templatesOption = templates.filter(
+  (app) =>
+    app.value.includes("/") &&
+    !app.value.includes("new-package") &&
+    !app.value.includes("typescript")
+);
 
 addCommand
   .name("add")
