@@ -7,6 +7,10 @@ type WorkspaceConfig = {
   [key: string]: unknown;
 };
 
+/**
+ * Get directories values of packages field from `pnpm-workspace.yaml`
+ * @returns Array object for consola prompt select option.
+ */
 async function getWorkspaceDirectory() {
   const fileContent = await fs.readFile(
     path.join(process.cwd(), "pnpm-workspace.yaml"),

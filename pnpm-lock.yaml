@@ -43,6 +43,9 @@ importers:
       giget:
         specifier: ^2.0.0
         version: 2.0.0
+      tree-kill:
+        specifier: ^1.2.2
+        version: 1.2.2
       yaml:
         specifier: ^2.8.1
         version: 2.8.1
@@ -1226,6 +1229,10 @@ packages:
   tinyspy@4.0.4:
     resolution: {integrity: sha512-azl+t0z7pw/z958Gy9svOTuzqIk6xq+NSheJzn5MMWtWTFywIacg2wUlzKFGtt3cthx0r2SxMK0yzJOR0IES7Q==}
     engines: {node: '>=14.0.0'}
+
+  tree-kill@1.2.2:
+    resolution: {integrity: sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==}
+    hasBin: true
 
   trpc-cli@0.10.2:
     resolution: {integrity: sha512-zBkL88AeX0vQLXwEAcX6WUoT4Sopr97nFDFeD1zmW33wHQwBKbszylplNVk6BO/cuhgm/iq8/cG27NokqKA1mw==}
@@ -2426,6 +2433,8 @@ snapshots:
   tinyrainbow@2.0.0: {}
 
   tinyspy@4.0.4: {}
+
+  tree-kill@1.2.2: {}
 
   trpc-cli@0.10.2(typescript@5.9.2):
     dependencies:

@@ -1,13 +1,12 @@
 import path from "node:path";
 import { Command } from "commander";
 import { consola } from "consola";
-import { gitInit } from "../utils/git-init";
-import { pnpmInstall } from "../utils/install-packages";
 import { packageJson } from "../utils/package-json";
+import { gitInit, pnpmInstall } from "../utils/run";
 import { addPackageChotostackConfig } from "../utils/stack-config";
 import { downloadTemplateWithoutMsg } from "../utils/template-operations";
 
-type TAppTemplate = "base-template" | "basic-app";
+type TAppTemplate = "base-template" | "basic-next-app" | "next-supabase";
 
 type TAppTemplateOptions = {
   label: string;
@@ -20,8 +19,12 @@ const appTemplateOptions: TAppTemplateOptions = [
     value: "base-template",
   },
   {
-    label: "Basic App",
-    value: "basic-app",
+    label: "Basic Next App",
+    value: "basic-next-app",
+  },
+  {
+    label: "Next App with Supabase",
+    value: "next-supabase",
   },
 ];
 
@@ -34,8 +37,8 @@ createCommand
   .version(packageJson.version, "-v, --version")
   .argument("[project-name]", "Project Name")
   .option("-n, --name [name]", "Project Name")
-  .option("--install [install]", "Install node module packages", false)
-  .option("--git [git]", "Initiate git", false)
+  .option("--no-install [install]", "Install node module packages")
+  .option("--no-git [git]", "Initiate git")
   .action(async (projectNameArg, options) => {
     if (!options.name && projectNameArg === undefined) {
       const projectName = await consola.prompt("Project Name", {
@@ -81,7 +84,7 @@ createCommand
 async function createApp(downloadDir: string, templateName: TAppTemplate) {
   await downloadTemplateWithoutMsg(downloadDir, "base");
 
-  if (templateName === "basic-app") {
+  if (templateName === "basic-next-app") {
     await downloadTemplateWithoutMsg(
       path.join(downloadDir, "apps/nextjs-app"),
       "apps/nextjs-app"
