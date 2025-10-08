@@ -1,6 +1,7 @@
 import path from "node:path";
 import { Command } from "commander";
 import { consola } from "consola";
+import type { TTemplateNamespace } from "../auto-gen/templates";
 import { packageJson } from "../utils/package-json";
 import { gitInit, pnpmInstall } from "../utils/run";
 import { addPackageChotostackConfig } from "../utils/stack-config";
@@ -11,25 +12,34 @@ type TAppTemplate = "base-template" | "basic-next-app" | "next-supabase";
 type TAppTemplateOptions = {
   label: string;
   value: TAppTemplate;
+  packages?: TTemplateNamespace[];
 }[];
 
 const appTemplateOptions: TAppTemplateOptions = [
   {
     label: "Base Template",
     value: "base-template",
+    packages: [],
   },
   {
     label: "Basic Next App",
     value: "basic-next-app",
+    packages: ["apps/nextjs-app", "packages/nextjs-shadcn-ui"],
   },
   {
     label: "Next App with Supabase",
     value: "next-supabase",
+    packages: [
+      "apps/nextjs-app",
+      "packages/nextjs-shadcn-ui",
+      "packages/supabase-local-docker",
+    ],
   },
 ];
 
 export const createCommand = new Command();
 let projectPath = "";
+let installPackages: TTemplateNamespace[] = [];
 
 createCommand
   .name("create")
@@ -61,10 +71,14 @@ createCommand
       options: appTemplateOptions,
     });
 
+    installPackages =
+      appTemplateOptions.find((option) => option.value === selectedOption)
+        ?.packages || [];
+
     consola.start(
       `Creating project with ${appTemplateOptions.find((option) => option.value === selectedOption)?.label} template...`
     );
-    await createApp(projectPath, selectedOption)
+    await createApp(projectPath)
       .then(() => {
         consola.success("Project is created!");
       })
@@ -81,27 +95,12 @@ createCommand
     }
   });
 
-async function createApp(downloadDir: string, templateName: TAppTemplate) {
+async function createApp(downloadDir: string) {
   await downloadTemplateWithoutMsg(downloadDir, "base");
 
-  if (templateName === "basic-next-app") {
-    await downloadTemplateWithoutMsg(
-      path.join(downloadDir, "apps/nextjs-app"),
-      "apps/nextjs-app"
-    ).then(
-      async () =>
-        await addPackageChotostackConfig("apps/nextjs-app", downloadDir)
-    );
-
-    await downloadTemplateWithoutMsg(
-      path.join(downloadDir, "packages/nextjs-shadcn-ui"),
-      "packages/nextjs-shadcn-ui"
-    ).then(
-      async () =>
-        await addPackageChotostackConfig(
-          "packages/nextjs-shadcn-ui",
-          downloadDir
-        )
+  for (const pkg of installPackages) {
+    await downloadTemplateWithoutMsg(path.join(downloadDir, pkg), pkg).then(
+      async () => await addPackageChotostackConfig(pkg, downloadDir)
     );
   }
 }
