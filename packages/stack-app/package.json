@@ -4,18 +4,20 @@
   "type": "module",
   "private": true,
   "files": [
+    "bin",
     "dist",
     "package.json"
   ],
   "bin": {
-    "chotostack": "./dist/server.js"
+    "chotostack": "./bin/index.js"
   },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build && tsx ./scripts/build.ts",
     "start": "next start",
     "lint": "biome check --write .",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "pub:link": "npm unlink -g && npm link"
   },
   "dependencies": {
     "next": "15.5.3",
