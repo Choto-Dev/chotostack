@@ -11,6 +11,9 @@
     "rules": {
       "nursery": {
         "useSortedClasses": "on"
+      },
+      "suspicious": {
+        "noConsole": "off"
       }
     },
     "domains": {

@@ -3,9 +3,16 @@
   "version": "0.0.1",
   "type": "module",
   "private": true,
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "bin": {
+    "chotostack": "./dist/server.js"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "next build && tsx ./scripts/build.ts",
     "start": "next start",
     "lint": "biome check --write .",
     "check-types": "tsc --noEmit"
@@ -16,12 +23,13 @@
     "react-dom": "19.1.0"
   },
   "devDependencies": {
+    "@choto/typescript-config": "workspace:*",
+    "@choto/ui": "workspace:*",
     "@tailwindcss/postcss": "^4.1.11",
     "@types/node": "^22.15.3",
     "@types/react": "19.1.8",
     "@types/react-dom": "19.1.8",
-    "@choto/ui": "workspace:*",
-    "@choto/typescript-config": "workspace:*",
+    "tsx": "^4.20.6",
     "typescript": "catalog:"
   }
 }
