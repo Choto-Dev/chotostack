@@ -1,4 +1,4 @@
-# `@workspace/typescript-config`
+# `@choto/typescript-config`
 
 Config files for typescript `tsconfig.json`.
 
@@ -13,7 +13,7 @@ Update `package.json` file
   // ...
   "devDependencies": {
     // ...
-    "@workspace/typescript-config": "workspace:*",
+    "@choto/typescript-config": "workspace:*",
     // ...
   }
 }
@@ -23,7 +23,7 @@ Update `tsconfig.json` file
 
 ```json filename=tsconfig.json
 {
-  "extends": "@workspace/typescript-config/nextjs",
+  "extends": "@choto/typescript-config/nextjs",
   // ...
 }
 ```
@@ -36,6 +36,6 @@ pnpm i
 
 ### Exports
 
-- `@workspace/typescript-config/base`: Base TypeScript config file.
-- `@workspace/typescript-config/nextjs`: TypeScript config for nextjs.
-- `@workspace/typescript-config/react-library`: TypeScript config for react based package.
+- `@choto/typescript-config/base`: Base TypeScript config file.
+- `@choto/typescript-config/nextjs`: TypeScript config for nextjs.
+- `@choto/typescript-config/react-library`: TypeScript config for react based package.

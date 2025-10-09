@@ -1,0 +1,11 @@
+{
+  "extends": "@choto/typescript-config/react-library",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@choto/ui/*": ["./src/*"]
+    }
+  },
+  "include": ["."],
+  "exclude": ["node_modules", "dist"]
+}
