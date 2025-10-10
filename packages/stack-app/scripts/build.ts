@@ -33,6 +33,29 @@ function copyRecursive(src: string, dest: string) {
   }
 }
 
+function commentOutProcessChdir(filePath: string) {
+  if (!fs.existsSync(filePath)) {
+    console.warn(`⚠️  File not found: ${filePath}`);
+    return;
+  }
+
+  const content = fs.readFileSync(filePath, "utf8");
+
+  // Comment out `process.chdir(__dirname)` if found
+  const updated = content.replace(
+    // biome-ignore lint/performance/useTopLevelRegex: <"No prob">
+    /^(\s*)process\.chdir\(__dirname\);?/m,
+    "$1// process.chdir(__dirname);"
+  );
+
+  if (updated !== content) {
+    fs.writeFileSync(filePath, updated, "utf8");
+    console.log("✏️  Commented out process.chdir(__dirname) in server.js");
+  } else {
+    console.log("ℹ️  No `process.chdir(__dirname)` found in server.js");
+  }
+}
+
 function main() {
   console.log("🚀 Building standalone output...");
 
@@ -53,6 +76,10 @@ function main() {
   // copy public
   console.log("🌍 Copying public → dist/public");
   copyRecursive(publicDir, path.join(distDir, "public"));
+
+  // Modify server.js
+  const serverFile = path.join(distDir, "server.js");
+  commentOutProcessChdir(serverFile);
 
   console.log("✅ Done! All files copied to dist/");
 }
