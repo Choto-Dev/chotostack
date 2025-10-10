@@ -1,6 +1,7 @@
 import { Button } from "@choto/ui/ui/button";
 import Link from "next/link";
 import SwitchThemeButton from "@/components/switch-theme-button";
+import CreateBtn from "./create-btn";
 
 export default function Page() {
   return (
@@ -17,6 +18,8 @@ export default function Page() {
             Read Docs and Start Coding
           </Link>
         </Button>
+
+        <CreateBtn />
         <SwitchThemeButton />
       </div>
     </main>
