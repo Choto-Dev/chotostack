@@ -1,6 +1,6 @@
 {
-  "name": "Nextjs App",
-  "short_name": "NA",
+  "name": "ChatoStack",
+  "short_name": "CS",
   "icons": [
     {
       "src": "./icons/android-chrome-192x192.png",

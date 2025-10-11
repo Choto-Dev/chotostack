@@ -17,5 +17,5 @@ const fonts = {
   geistMono,
 };
 
-export type Fonts = typeof fonts;
+export type TFonts = typeof fonts;
 export default fonts;

@@ -1,11 +1,11 @@
 const siteConfig = {
-  title: "Little Proj",
-  description: "Minimalistic Starter Kit for Next.js",
+  title: "ChotoStack",
+  description: "Create and maintain chotostack project",
   author: {
     name: "StepAsideLiL",
     url: "https://github.com/StepAsideLiL",
   },
 };
 
-export type SiteConfig = typeof siteConfig;
+export type TSiteConfig = typeof siteConfig;
 export default siteConfig;

@@ -1,1 +1,1 @@
-# Nextjs App for ChotoStack
+# ChotoStack
