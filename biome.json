@@ -26,6 +26,9 @@
     "enabled": true,
     "rules": {
       "recommended": true,
+      "style": {
+        "noMagicNumbers": "off"
+      },
       "suspicious": {
         "noUnknownAtRules": "off"
       }
