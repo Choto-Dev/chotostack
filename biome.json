@@ -26,6 +26,10 @@
     "enabled": true,
     "rules": {
       "recommended": true,
+      "performance": {
+        "noBarrelFile": "off",
+        "noNamespaceImport": "off"
+      },
       "style": {
         "noMagicNumbers": "off"
       },
