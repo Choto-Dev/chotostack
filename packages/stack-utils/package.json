@@ -1,0 +1,28 @@
+{
+  "name": "@choto/stack-utils",
+  "description": "Utility for ChotoStack",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "pnpm gen:template && unbuild",
+    "gen:template": "tsx ./scripts/generate-tempate-types.ts",
+    "lint": "biome check --write ."
+  },
+  "devDependencies": {
+    "@choto/typescript-config": "workspace:*",
+    "@types/node": "^24.5.2",
+    "tsx": "^4.20.6",
+    "typescript": "catalog:",
+    "unbuild": "^3.6.1"
+  },
+  "exports": {
+    ".": {
+      "default": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "dependencies": {
+    "giget": "^2.0.0"
+  }
+}

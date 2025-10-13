@@ -1,0 +1,9 @@
+{
+  "extends": "@choto/typescript-config/base",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "rootDir": "./"
+  },
+  "exclude": ["node_modules", "dist"]
+}
