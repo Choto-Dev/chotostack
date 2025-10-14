@@ -1,9 +1,11 @@
 // import fs from "node:fs/promises";
 import path from "node:path";
+import { downloadTemplate } from "@choto/stack-utils";
 import { Command } from "commander";
 import { consola } from "consola";
 import { packageJson } from "../utils/package-json";
-import { downloadTemplate } from "../utils/template-operations";
+
+// import { downloadTemplate } from "../utils/template-operations";
 // import { defineChotostackConfig } from "../utils/stack-config";
 
 export const initCommand = new Command();

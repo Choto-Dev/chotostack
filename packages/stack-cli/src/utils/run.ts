@@ -4,12 +4,19 @@ import kill from "tree-kill";
 
 const activeProcesses = new Set<ChildProcess>();
 
-const run = (
+/**
+ * Run commands
+ * @param cmd Command
+ * @param args Command arguments
+ * @param rootDir Command spawn directory
+ * @returns Void promise
+ */
+function run(
   cmd: string,
   args: string[] = [],
   rootDir: string = process.cwd()
-) =>
-  new Promise<void>((resolve, reject) => {
+) {
+  return new Promise<void>((resolve, reject) => {
     const proc = spawn(cmd, args, {
       cwd: rootDir,
       shell: true,
@@ -31,6 +38,7 @@ const run = (
       reject(err);
     });
   });
+}
 
 const killAll = (signal: NodeJS.Signals = "SIGTERM") => {
   for (const proc of activeProcesses) {

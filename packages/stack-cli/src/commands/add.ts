@@ -1,10 +1,13 @@
 import path from "node:path";
+import {
+  addPackageChotostackConfig,
+  downloadTemplate,
+  type TTemplateNamespace,
+  templates,
+} from "@choto/stack-utils";
 import { Command } from "commander";
 import { consola } from "consola";
-import { type TTemplateNamespace, templates } from "../auto-gen/templates.js";
 import { packageJson } from "../utils/package-json";
-import { addPackageChotostackConfig } from "../utils/stack-config.js";
-import { downloadTemplate } from "../utils/template-operations.js";
 
 export const addCommand = new Command();
 let downloadTemplateDir = "";

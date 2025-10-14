@@ -1,12 +1,19 @@
-import { Command } from "commander";
-import { consola } from "consola";
-import type { TTemplateNamespace } from "../auto-gen/templates.js";
-import { packageJson } from "../utils/package-json";
 import {
+  deleteTemplate,
   installedPackagesInChotostackConfig,
   removePackageFromChotostackConfig,
-} from "../utils/stack-config.js";
-import { deleteTemplate } from "../utils/template-operations.js";
+  type TTemplateNamespace,
+} from "@choto/stack-utils";
+import { Command } from "commander";
+import { consola } from "consola";
+import { packageJson } from "../utils/package-json";
+
+// import type { TTemplateNamespace } from "../auto-gen/templates.js";
+// import {
+//   installedPackagesInChotostackConfig,
+//   removePackageFromChotostackConfig,
+// } from "../utils/stack-config.js";
+// import { deleteTemplate } from "../utils/template-operations.js";
 
 export const removeCommand = new Command();
 let templateNamespace = "";

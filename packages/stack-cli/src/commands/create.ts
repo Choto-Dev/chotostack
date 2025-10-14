@@ -1,11 +1,13 @@
 import path from "node:path";
+import {
+  addPackageChotostackConfig,
+  downloadTemplateWithoutMsg,
+  type TTemplateNamespace,
+} from "@choto/stack-utils";
 import { Command } from "commander";
 import { consola } from "consola";
-import type { TTemplateNamespace } from "../auto-gen/templates";
 import { packageJson } from "../utils/package-json";
 import { gitInit, pnpmInstall } from "../utils/run";
-import { addPackageChotostackConfig } from "../utils/stack-config";
-import { downloadTemplateWithoutMsg } from "../utils/template-operations";
 
 type TAppTemplate = "base-template" | "basic-next-app" | "next-supabase";
 
