@@ -54,7 +54,6 @@ export function GET(req: NextRequest) {
       }
     );
   } catch (error) {
-    // biome-ignore lint/suspicious/noConsole: <"log catch error">
     console.error(error);
     return new Response("Failed to generate image", { status: 500 });
   }
