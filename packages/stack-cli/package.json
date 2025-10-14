@@ -41,6 +41,7 @@
   "dependencies": {
     "@choto/stack-utils": "workspace:*",
     "commander": "^14.0.1",
-    "consola": "^3.4.2"
+    "consola": "^3.4.2",
+    "tree-kill": "^1.2.2"
   }
 }

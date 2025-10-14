@@ -24,7 +24,6 @@
   },
   "dependencies": {
     "giget": "^2.0.0",
-    "tree-kill": "^1.2.2",
     "yaml": "^2.8.1"
   }
 }
