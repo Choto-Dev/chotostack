@@ -4,9 +4,9 @@
   "description": "CLI for chotostack project.",
   "type": "module",
   "scripts": {
-    "build": "pnpm gen:template && unbuild",
+    "build": "unbuild",
+    "check-types": "tsc --noEmit",
     "cli": "node ./dist/index.mjs",
-    "gen:template": "tsx ./scripts/generate-tempate-types.ts",
     "lint": "biome check --write .",
     "pub:link": "npm unlink -g && npm link",
     "start": "pnpm build && pnpm cli"
@@ -39,10 +39,8 @@
     "unbuild": "^3.6.1"
   },
   "dependencies": {
+    "@choto/stack-utils": "workspace:*",
     "commander": "^14.0.1",
-    "consola": "^3.4.2",
-    "giget": "^2.0.0",
-    "tree-kill": "^1.2.2",
-    "yaml": "^2.8.1"
+    "consola": "^3.4.2"
   }
 }
