@@ -1,6 +1,7 @@
 import path from "node:path";
 import {
   addPackageChotostackConfig,
+  appTemplateOptions,
   downloadTemplateWithoutMsg,
   type TTemplateNamespace,
 } from "@choto/stack-utils";
@@ -8,36 +9,6 @@ import { Command } from "commander";
 import { consola } from "consola";
 import { packageJson } from "../utils/package-json";
 import { gitInit, pnpmInstall } from "../utils/run";
-
-type TAppTemplate = "base-template" | "basic-next-app" | "next-supabase";
-
-type TAppTemplateOptions = {
-  label: string;
-  value: TAppTemplate;
-  packages?: TTemplateNamespace[];
-}[];
-
-const appTemplateOptions: TAppTemplateOptions = [
-  {
-    label: "Base Template",
-    value: "base-template",
-    packages: [],
-  },
-  {
-    label: "Basic Next App",
-    value: "basic-next-app",
-    packages: ["apps/nextjs-app", "packages/nextjs-shadcn-ui"],
-  },
-  {
-    label: "Next App with Supabase",
-    value: "next-supabase",
-    packages: [
-      "apps/nextjs-app",
-      "packages/nextjs-shadcn-ui",
-      "packages/supabase-local-docker",
-    ],
-  },
-];
 
 export const createCommand = new Command();
 let projectPath = "";
