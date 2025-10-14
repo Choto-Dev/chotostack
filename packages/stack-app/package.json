@@ -19,6 +19,7 @@
     "pub:link": "npm unlink -g && npm link"
   },
   "dependencies": {
+    "@choto/stack-utils": "workspace:*",
     "next": "15.5.3",
     "react": "19.1.0",
     "react-dom": "19.1.0"

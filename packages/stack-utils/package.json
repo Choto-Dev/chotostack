@@ -20,10 +20,15 @@
     ".": {
       "default": "./dist/index.mjs",
       "types": "./dist/index.d.ts"
+    },
+    "./zod": {
+      "default": "./dist/lib/zod.mjs",
+      "types": "./dist/lib/zod.d.ts"
     }
   },
   "dependencies": {
     "giget": "^2.0.0",
-    "yaml": "^2.8.1"
+    "yaml": "^2.8.1",
+    "zod": "^4.1.11"
   }
 }
