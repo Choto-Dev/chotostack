@@ -9,6 +9,9 @@
   },
   "linter": {
     "rules": {
+      "performance": {
+        "useTopLevelRegex": "off"
+      },
       "style": {
         "noNonNullAssertion": "off"
       }
