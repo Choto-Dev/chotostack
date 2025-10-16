@@ -107,6 +107,11 @@ function scopeNameErrors(scopeName: string) {
     errors.push('Scope name must start with "@".');
   }
 
+  // If `scopeName` does not start with "@" character
+  if (scopeName.startsWith("@") && scopeName.length < 2) {
+    errors.push('"@" can not be only character.');
+  }
+
   if (!/^@[a-z0-9-*~][a-z0-9-*._~]*$/.test(scopeName)) {
     errors.push("No special character except -");
   }
