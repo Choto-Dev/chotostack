@@ -42,10 +42,14 @@ function packageNameErrors(packageName: string) {
     }
 
     // validate package name after scope.
-    if (pkg && !/^[a-z0-9-._~]+$/.test(pkg)) {
-      errors.push(
-        "Invalid package name within scope. It may only contain lowercase letters, numbers, hyphens (-), dots (.), underscores (_), or tildes (~)."
-      );
+    if (pkg) {
+      if (!/^[a-z0-9-._~]+$/.test(pkg)) {
+        errors.push(
+          "Invalid package name within scope. It may only contain lowercase letters, numbers, hyphens (-), dots (.), underscores (_), or tildes (~)."
+        );
+      }
+    } else {
+      errors.push("Package name can not be empty.");
     }
   } else {
     // validate `packageName` without any scope.
@@ -75,4 +79,42 @@ function validatePackageName(packageName: string) {
   return pattern.test(packageName);
 }
 
-export { packageNameErrors, validatePackageName };
+/**
+ * Validate scope name.
+ * @param scopeName Name of scope.
+ * @returns `true` for valid scope name, `false` otherwise.
+ */
+function validatePackageScopeName(scopeName: string) {
+  // `scopeName` can not be empty.
+  if (!scopeName) {
+    return false;
+  }
+
+  return /^@[a-z0-9-*~][a-z0-9-*._~]*$/.test(scopeName);
+}
+
+/**
+ * Validate package name.
+ * @param packageName Name of package.
+ * @returns `true` for valid package name, `false` otherwise.
+ */
+function validateOnlyPackageName(packageName: string) {
+  // `packageName` can not be empty.
+  if (!packageName) {
+    return false;
+  }
+
+  // `packageName` is a builtin module.
+  if (builtinModules.includes(packageName)) {
+    return false;
+  }
+
+  return /^[a-z0-9-~][a-z0-9-._~]*$/.test(packageName);
+}
+
+export {
+  packageNameErrors,
+  validateOnlyPackageName,
+  validatePackageName,
+  validatePackageScopeName,
+};
