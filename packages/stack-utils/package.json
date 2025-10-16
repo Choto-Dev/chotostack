@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "build": "pnpm gen:template && unbuild",
+    "check-types": "tsc --noEmit",
     "gen:template": "tsx ./scripts/generate-tempate-types.ts",
     "lint": "biome check --write ."
   },
