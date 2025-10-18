@@ -1,18 +1,21 @@
 "use server";
 
-import fs from "node:fs/promises";
 import path from "node:path";
+import { installTemplate } from "@choto/stack-utils";
+import type { TCreateProjectSchema } from "@/lib/schemas";
 
-export default async function createNewProject(
-  projectName: string,
-  workspaceName: string
-) {
-  let projectPath = path.resolve(projectName);
+const createNewProject = async (data: TCreateProjectSchema) => {
+  let projectPath = path.resolve(data.projectName);
 
   if (process.env.NODE_ENV === "development") {
-    projectPath = path.resolve("../../../", projectName);
+    projectPath = path.resolve("../../../", data.projectName);
   }
-  console.log(projectPath, workspaceName);
 
-  await fs.mkdir(projectPath);
-}
+  const { error } = await installTemplate(projectPath, "base");
+
+  if (error && error?.length > 0) {
+    return error;
+  }
+};
+
+export default createNewProject;

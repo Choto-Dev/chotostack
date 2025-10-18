@@ -1,4 +1,7 @@
 import CreateProjectForm from "@/components/client-components/create-project-form";
+import nextMetadata from "@/lib/next-metadata";
+
+export const metadata = nextMetadata("Create a project");
 
 export default function Page() {
   return (

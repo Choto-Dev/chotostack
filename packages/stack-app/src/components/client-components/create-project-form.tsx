@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@choto/ui/lib/hook-form-resolvers";
 import { Controller, useForm } from "@choto/ui/lib/react-hook-form";
-import { z } from "@choto/ui/lib/zod";
+// import { cn } from "@choto/ui/lib/utils";
 import { Button } from "@choto/ui/ui/button";
 import {
   Card,
@@ -20,31 +20,61 @@ import {
   FieldLabel,
 } from "@choto/ui/ui/field";
 import { Input } from "@choto/ui/ui/input";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@choto/ui/ui/input-group";
 import { useId, useState } from "react";
-
-const formSchema = z.object({
-  projectName: z.string(),
-  workspaceName: z.string(),
-});
+import createNewProject from "@/lib/actions/create-new-project";
+import validProjectName from "@/lib/actions/valid-package-name";
+import { schemas, type TCreateProjectSchema } from "@/lib/schemas";
 
 export default function CreateProjectForm() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<TCreateProjectSchema>({
+    resolver: zodResolver(schemas.createProject),
     defaultValues: {
-      projectName: "",
-      workspaceName: "",
+      projectName: "my-app",
+      workspaceName: "workspace",
     },
   });
   const formId = useId();
-  const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+  // const [errorCount, setErrorCount] = useState(0);
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
-    setLoading(false);
-    console.log(data);
+  async function onChange(changedData: TCreateProjectSchema) {
+    const { packageErrors, scopeErrors } = await validProjectName(changedData);
+
+    // setErrorCount(errors.length);
+
+    if (packageErrors.length > 0) {
+      setDisabled(true);
+      form.setError("projectName", {
+        message: packageErrors[0],
+      });
+    } else {
+      setDisabled(false);
+    }
+
+    if (scopeErrors.length > 0) {
+      setDisabled(true);
+      form.setError("workspaceName", {
+        message: scopeErrors[0],
+      });
+    } else {
+      setDisabled(false);
+    }
+  }
+
+  async function onSubmit(submitData: TCreateProjectSchema) {
+    setDisabled(false);
+    await createNewProject(submitData).then(() => {
+      setDisabled(true);
+    });
   }
 
   return (
-    <Card className="w-96 border">
+    <Card>
       <CardHeader>
         <CardTitle>Create New Project</CardTitle>
         <CardDescription>
@@ -52,7 +82,12 @@ export default function CreateProjectForm() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
+        <form
+          className="w-full min-w-72 max-w-96"
+          id={formId}
+          onChange={form.handleSubmit(onChange)}
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
           <FieldGroup>
             <Controller
               control={form.control}
@@ -84,14 +119,17 @@ export default function CreateProjectForm() {
                   <FieldLabel htmlFor={`${formId}-workspaceName`}>
                     Workspace Name
                   </FieldLabel>
-                  <Input
-                    {...field}
-                    aria-autocomplete="none"
-                    aria-invalid={fieldState.invalid}
-                    autoComplete="off"
-                    id={`${formId}-workspaceName`}
-                    placeholder="EX: workspace"
-                  />
+                  <InputGroup>
+                    <InputGroupAddon>@</InputGroupAddon>
+                    <InputGroupInput
+                      {...field}
+                      aria-autocomplete="none"
+                      aria-invalid={fieldState.invalid}
+                      autoComplete="off"
+                      id={`${formId}-workspaceName`}
+                      placeholder="EX: workspace"
+                    />
+                  </InputGroup>
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}
@@ -105,7 +143,7 @@ export default function CreateProjectForm() {
       <CardFooter>
         <Button
           className="w-full"
-          disabled={loading}
+          disabled={disabled}
           form={formId}
           type="submit"
         >

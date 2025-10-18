@@ -83,4 +83,52 @@ async function deleteTemplate(namespace: TTemplateNamespace) {
   await fs.rm(packageDir, { recursive: true });
 }
 
-export { downloadTemplate, downloadTemplateWithoutMsg, deleteTemplate };
+// biome-ignore lint/suspicious/noExplicitAny: <"allow any">
+type TResonse<D = any, M = string[], E = string[]> = {
+  data?: D;
+  message?: M;
+  error?: E;
+};
+
+async function installTemplate(
+  downloadDir: string,
+  namespace: TTemplateNamespace
+): Promise<TResonse> {
+  const messages: string[] = [];
+  const errors: string[] = [];
+
+  await giget
+    .downloadTemplate(
+      `github:Choto-Dev/choto-templates/templates/${namespace}/files`,
+      {
+        dir: downloadDir,
+      }
+    )
+    .then(async ({ dir }) => {
+      const entries = await fs.readdir(dir);
+      if (entries.length === 0) {
+        errors.push("Failed to create files");
+        await fs
+          .rm(dir, { recursive: true })
+          .then(() => {
+            messages.push(`${dir} is removed.`);
+          })
+          .catch((err) => {
+            errors.push(err);
+          });
+        return;
+      }
+    });
+
+  return {
+    message: messages,
+    error: errors,
+  };
+}
+
+export {
+  downloadTemplate,
+  downloadTemplateWithoutMsg,
+  deleteTemplate,
+  installTemplate,
+};
