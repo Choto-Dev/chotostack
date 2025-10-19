@@ -1,1 +1,1 @@
-export * from "zod/v3";
+export { z } from "zod/v3";
