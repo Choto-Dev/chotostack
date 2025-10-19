@@ -1,0 +1,36 @@
+{
+  "name": "@choto/stack-effect-utils",
+  "description": "Utility for ChotoStack",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "pnpm gen:template && unbuild",
+    "check-types": "tsc --noEmit",
+    "gen:template": "tsx ./scripts/generate-tempate-types.ts",
+    "lint": "biome check --write ."
+  },
+  "devDependencies": {
+    "@choto/typescript-config": "workspace:*",
+    "@types/node": "^24.5.2",
+    "tsx": "^4.20.6",
+    "typescript": "catalog:",
+    "unbuild": "^3.6.1"
+  },
+  "dependencies": {
+    "effect": "^3.18.4",
+    "giget": "2.0.0",
+    "yaml": "2.8.1",
+    "zod": "4.1.11"
+  },
+  "exports": {
+    ".": {
+      "default": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./zod": {
+      "default": "./dist/lib/zod.mjs",
+      "types": "./dist/lib/zod.d.ts"
+    }
+  }
+}
